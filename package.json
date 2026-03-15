@@ -1,0 +1,111 @@
+{
+  "name": "notepadpp-mac",
+  "version": "1.0.0",
+  "description": "A Notepad++ clone for macOS built with Electron and Monaco Editor",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:mac": "electron-builder --mac --universal",
+    "build:mac-dmg": "electron-builder --mac dmg --universal",
+    "build:mac-arm": "electron-builder --mac --arm64",
+    "build:mac-intel": "electron-builder --mac --x64",
+    "build:win": "electron-builder --win",
+    "build": "electron-builder",
+    "generate-icon": "node scripts/generate-icon.js"
+  },
+  "build": {
+    "appId": "com.notepadppmac.app",
+    "productName": "Notepad++ Mac",
+    "copyright": "Copyright 2026",
+    "asar": true,
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "src/**/*",
+      "node_modules/monaco-editor/min/**/*",
+      "node_modules/monaco-editor/min-maps/**/*",
+      "!node_modules/monaco-editor/esm/**/*",
+      "!node_modules/monaco-editor/dev/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "assets/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["universal"]
+        },
+        {
+          "target": "zip",
+          "arch": ["universal"]
+        }
+      ],
+      "darkModeSupport": true,
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "CFBundleDocumentTypes": [
+          {
+            "CFBundleTypeName": "Text Document",
+            "CFBundleTypeRole": "Editor",
+            "LSItemContentTypes": ["public.plain-text", "public.source-code", "public.text"],
+            "LSHandlerRank": "Alternate"
+          },
+          {
+            "CFBundleTypeName": "Source Code",
+            "CFBundleTypeRole": "Editor",
+            "CFBundleTypeExtensions": [
+              "js", "ts", "jsx", "tsx", "py", "rb", "go", "rs", "swift",
+              "c", "cpp", "h", "hpp", "cs", "java", "php", "pl", "lua",
+              "sh", "bash", "zsh", "sql"
+            ],
+            "LSHandlerRank": "Alternate"
+          },
+          {
+            "CFBundleTypeName": "Web Document",
+            "CFBundleTypeRole": "Editor",
+            "CFBundleTypeExtensions": [
+              "html", "htm", "css", "scss", "less", "json", "xml",
+              "yaml", "yml", "svg", "md", "markdown"
+            ],
+            "LSHandlerRank": "Alternate"
+          }
+        ],
+        "NSDocumentsFolderUsageDescription": "Notepad++ Mac needs access to your documents to open and save files.",
+        "NSDesktopFolderUsageDescription": "Notepad++ Mac needs access to your desktop to open and save files."
+      }
+    },
+    "dmg": {
+      "background": null,
+      "icon": "assets/icon.icns",
+      "iconSize": 100,
+      "contents": [
+        { "x": 130, "y": 220 },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "title": "Install Notepad++ Mac"
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": ["nsis"]
+    }
+  },
+  "keywords": ["notepad++", "editor", "mac", "electron", "text-editor"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^41.0.2",
+    "monaco-editor": "^0.55.1"
+  },
+  "devDependencies": {
+    "electron-builder": "^26.8.1"
+  }
+}

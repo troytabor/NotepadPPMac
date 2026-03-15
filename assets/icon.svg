@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2b5ea7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a3a6e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="doc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8e8e8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="220" ry="220" fill="url(#bg)"/>
+  <!-- Document shape -->
+  <path d="M 280 160 L 620 160 L 760 300 L 760 864 L 280 864 Z" fill="url(#doc)" stroke="none"/>
+  <!-- Folded corner -->
+  <path d="M 620 160 L 620 300 L 760 300 Z" fill="#c0c0c0" stroke="none"/>
+  <!-- Code lines -->
+  <rect x="340" y="380" width="280" height="24" rx="12" fill="#2b5ea7" opacity="0.8"/>
+  <rect x="340" y="430" width="200" height="24" rx="12" fill="#4a90d9" opacity="0.6"/>
+  <rect x="340" y="480" width="340" height="24" rx="12" fill="#2b5ea7" opacity="0.8"/>
+  <rect x="340" y="530" width="160" height="24" rx="12" fill="#4a90d9" opacity="0.6"/>
+  <rect x="340" y="580" width="300" height="24" rx="12" fill="#2b5ea7" opacity="0.8"/>
+  <rect x="340" y="630" width="240" height="24" rx="12" fill="#4a90d9" opacity="0.6"/>
+  <rect x="340" y="680" width="180" height="24" rx="12" fill="#2b5ea7" opacity="0.8"/>
+  <rect x="340" y="730" width="320" height="24" rx="12" fill="#4a90d9" opacity="0.6"/>
+  <!-- N++ text -->
+  <text x="512" y="270" font-family="SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="80" font-weight="bold" fill="#2b5ea7" text-anchor="middle" opacity="0.3">N++</text>
+</svg>
