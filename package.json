@@ -5,8 +5,8 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "build:mac": "electron-builder --mac --universal",
-    "build:mac-dmg": "electron-builder --mac dmg --universal",
+    "build:mac": "electron-builder --mac --arm64",
+    "build:mac-dmg": "electron-builder --mac dmg --arm64",
     "build:mac-arm": "electron-builder --mac --arm64",
     "build:mac-intel": "electron-builder --mac --x64",
     "build:win": "electron-builder --win",
@@ -35,18 +35,17 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["universal"]
+          "arch": ["arm64"]
         },
         {
           "target": "zip",
-          "arch": ["universal"]
+          "arch": ["arm64"]
         }
       ],
       "darkModeSupport": true,
-      "hardenedRuntime": true,
+      "hardenedRuntime": false,
       "gatekeeperAssess": false,
-      "entitlements": "build/entitlements.mac.plist",
-      "entitlementsInherit": "build/entitlements.mac.plist",
+      "identity": null,
       "extendInfo": {
         "CFBundleDocumentTypes": [
           {

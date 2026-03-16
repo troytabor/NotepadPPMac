@@ -25,16 +25,32 @@ jobs:
       - name: Generate icon
         run: |
           npm run generate-icon
-          # Install librsvg for SVG to PNG conversion
           brew install librsvg
-          # Convert SVG -> PNG -> ICNS
           chmod +x scripts/convert-icon.sh
           ./scripts/convert-icon.sh
 
-      - name: Build macOS DMG (Universal)
+      - name: Build macOS app
         run: npm run build:mac
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+
+      - name: Ad-hoc codesign the app
+        run: |
+          APP_PATH=$(find dist/mac-arm64 -name "*.app" -maxdepth 1 | head -1)
+          if [ -n "$APP_PATH" ]; then
+            echo "Signing $APP_PATH"
+            codesign --force --deep --sign - "$APP_PATH"
+            echo "Verifying signature..."
+            codesign --verify --deep --strict "$APP_PATH" && echo "Signature OK" || echo "Signature verification warning (non-fatal for ad-hoc)"
+          fi
+
+      - name: Re-create DMG with signed app
+        run: |
+          npm run build:mac
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
 
       - name: Upload DMG artifact
         uses: actions/upload-artifact@v4
